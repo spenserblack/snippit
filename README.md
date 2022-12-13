@@ -24,3 +24,11 @@ $ snippit out "Hello World (JS)" > index.js
 # List all of your code snippets
 $ snippit list
 ```
+
+## How it works
+
+Code snippets get stored in a directory called `.snippit` in your home
+directory. The actual code snippet filenames are slugified versions of the
+snippet name. `__definitions__.yml` is a reserved filename, as it is used to
+map snippet names to their filenames. You can either select a snippet by its
+name or by its slugified name.
