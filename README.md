@@ -6,7 +6,7 @@
 
 Define, store, and output your code snippets.
 
-## (Proposed )Usage
+## (Proposed) Usage
 
 All uses of `snippit` can be replaced with the shortcut `snip`.
 
