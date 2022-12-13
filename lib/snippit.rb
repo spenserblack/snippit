@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Snippit manages code snippets.
-module Snippit
+class Snippit
   # Snippit::DEFINITIONS is a reserved filename for the snippet definitions.
   DEFINITIONS = '__definitions__.yml'
 
