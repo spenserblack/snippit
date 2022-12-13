@@ -1,5 +1,5 @@
 --no-private
 --protected
---title "Greeter"
+--title "Snippit"
 lib/**/*.rb -
 README.md

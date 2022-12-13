@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |spec|
-  spec.name                     = 'greeter'
+  spec.name                     = 'snippit'
   spec.version                  = '0.0.1'
-  spec.authors                  = ['Me']
+  spec.authors                  = ['Spenser Black']
 
-  spec.summary                 = 'A simple gem to greet people'
-  spec.description             = 'A simple gem to greet people, serving as a template for authoring gems'
+  spec.summary                 = 'Manage your personal code snippets'
+  spec.description             = 'Define, store, and output your code snippets'
 
-  spec.homepage                = 'https://github.com/ghost/greeter'
-  spec.license                 = 'MIT'  # Or whatever license you want to use
+  spec.homepage                = 'https://github.com/spenserblack/snippit'
+  spec.license                 = 'MIT'
 
   spec.required_ruby_version   = Gem::Requirement.new('>= 2.6.0')
 
@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
     'changelog_uri' => "#{spec.homepage}/releases",
     'documentation_uri' => "https://rubydoc.info/gems/#{spec.name}",
     'source_code_uri' => spec.homepage,
-    'github_repo' => "ssh://github.com/ghost/#{spec.name}",
+    'github_repo' => "ssh://github.com/spenserblack/#{spec.name}",
     'rubygems_mfa_required' => 'true'
   }
 

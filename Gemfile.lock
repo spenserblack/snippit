@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    greeter (0.0.1)
+    snippit (0.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -76,7 +76,6 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 2.0)
-  greeter!
   overcommit (~> 0.59)
   rake (~> 13.0)
   rspec (~> 3.11)
@@ -86,6 +85,7 @@ DEPENDENCIES
   rubocop-rspec (~> 2.13)
   simplecov (~> 0.21)
   simplecov-cobertura (~> 2.1)
+  snippit!
   yard (~> 0.9.28)
 
 BUNDLED WITH
