@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'snippit/version'
+
 # Snippit manages code snippets.
 class Snippit
   # Snippit::DEFINITIONS is a reserved filename for the snippet definitions.
