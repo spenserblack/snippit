@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/snippit.svg)](https://badge.fury.io/rb/snippit)
 [![CI](https://github.com/spenserblack/snippit/actions/workflows/ci.yml/badge.svg)](https://github.com/spenserblack/snippit/actions/workflows/ci.yml)
-[![CodeQL](https://github.com/spenserblack/snippit/actions/workflows/codeql.yml/badge.svg)](https://github.com/spenserblack/snippit/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/spenserblack/snippit/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/spenserblack/snippit/actions/workflows/github-code-scanning/codeql)
 [![codecov](https://codecov.io/gh/spenserblack/snippit/branch/main/graph/badge.svg?token=5yr1302Knn)](https://codecov.io/gh/spenserblack/snippit)
 
 Define, store, and output your code snippets.
