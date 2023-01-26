@@ -15,4 +15,16 @@ RSpec.describe Snippit::CLI do
       expect(described_class.new(args).start).to eq(0)
     end
   end
+
+  context 'when no arguments are given' do
+    let(:args) { [] }
+
+    it 'prints the usage' do
+      expect { described_class.new(args).start }.to output(/Usage:\ /).to_stdout
+    end
+
+    it 'returns 1' do
+      expect(described_class.new(args).start).to eq(1)
+    end
+  end
 end
