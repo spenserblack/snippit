@@ -20,7 +20,7 @@ module Snippit
 
       return Version.new.start if @opts[:version]
 
-      return Save.new(@opts[:save], @opts.slice(:force, :name, :slug)).start if @opts.key?(:save)
+      return Save.new(@opts[:save], **@opts.slice(:force, :name, :slug)).start if @opts.key?(:save)
 
       bad_usage
     end
