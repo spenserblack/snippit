@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'lib/snippit/version'
+
 Gem::Specification.new do |spec|
   spec.name                     = 'snippit'
-  spec.version                  = '0.0.1'
+  spec.version                  = Snippit::VERSION
   spec.authors                  = ['Spenser Black']
 
   spec.summary                 = 'Manage your personal code snippets'
