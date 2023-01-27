@@ -15,9 +15,11 @@ module Snippit
       #
       # @param [String] path The path to the snippet to save
       # @param [TrueClass|FalseClass] force
-      def initialize(path, force)
+      def initialize(path, force: false, name: nil, slug: nil)
         @force = force
         @path = path
+        @name = name
+        @slug = slug
       end
 
       # Starts the save subcommand.
@@ -27,9 +29,9 @@ module Snippit
         # TODO: Support --name to use a different name than the filename
         # TODO: Support --slug to use a different slug than the filename
         base_name = File.basename(@path)
-        slug = slugify(base_name)
+        slug = @slug || slugify(base_name)
 
-        handle(slug) { write_snippet(base_name, slug, File.read(@path), @force) }
+        handle(slug) { write_snippet(@name || base_name, slug, File.read(@path), @force) }
       end
 
       private
