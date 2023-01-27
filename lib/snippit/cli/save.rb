@@ -24,6 +24,7 @@ module Snippit
       #
       # @return [Integer] the exit code
       def start
+        # TODO: Refuse if filename would be .__definitions__.yml
         base_name = File.basename(@path)
         slug = slugify(base_name)
 
