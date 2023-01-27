@@ -57,5 +57,24 @@ RSpec.describe Snippit::CLI, '#start' do
                                                    { 'My Snippet' => 'my-snippet' }.to_yaml)
       end
     end
+
+    context 'when the file conflicts with an existing snippet' do
+      before do
+        allow(File).to receive(:exist?).with(File.expand_path('.snippit/my-snippet', Dir.home)).and_return(true)
+      end
+
+      it 'does not overwrite if --force is not given' do
+        described_class.new(args).start
+        expect(File).not_to have_received(:write)
+      end
+
+      it 'warns the user to use --force' do
+        expect { described_class.new(args).start }.to output(/Use\ --force/).to_stderr
+      end
+
+      it 'returns 1' do
+        expect(described_class.new(args).start).to eq(1)
+      end
+    end
   end
 end
