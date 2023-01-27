@@ -63,6 +63,8 @@ RSpec.describe Snippit::CLI, '#start' do
         allow(File).to receive(:exist?).with(File.expand_path('.snippit/my-snippet', Dir.home)).and_return(true)
         allow(File).to receive(:exist?).with(File.expand_path('.snippit/.__definitions__.yml',
                                                               Dir.home)).and_return(true)
+        allow(YAML).to receive(:load_file).with(File.expand_path('.snippit/.__definitions__.yml',
+                                                                 Dir.home)).and_return({ 'my-snippet' => 'My Snippet' })
       end
 
       it 'does not overwrite if --force is not given' do
