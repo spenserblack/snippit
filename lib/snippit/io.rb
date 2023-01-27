@@ -16,7 +16,7 @@ module Snippit
       raise SnippetExistsError, slug if File.exist?(filepath!(slug)) && !force
 
       File.write(filepath!(slug), contents)
-      write_definition(definitions.merge(name => slug))
+      write_definition(definitions.merge(slug => name))
     end
 
     # Gets the filepath to the snippet.
