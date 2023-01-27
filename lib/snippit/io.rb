@@ -43,7 +43,7 @@ module Snippit
     def definitions
       return {} unless File.exist?(definitions_file)
 
-      YAML.load_file(definitions_file)
+      @definitions ||= YAML.load_file(definitions_file)
     end
 
     # Writes the definitions to the ~/.snippit/.__definitions__.yml file.
