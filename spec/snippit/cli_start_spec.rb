@@ -2,6 +2,7 @@
 
 require 'snippit/cli'
 require 'snippit/version'
+require 'yaml'
 
 RSpec.describe Snippit::CLI, '#start' do
   context 'when --version is given' do
@@ -34,13 +35,11 @@ RSpec.describe Snippit::CLI, '#start' do
     before do
       allow(File).to receive(:write)
       allow(FileUtils).to receive(:mkdir_p)
+      allow(File).to receive(:read).with('My Snippet').and_return('foo')
     end
 
     context 'when the .snippit directory does not exist' do
-      before do
-        allow(File).to receive(:exist?).and_return(false)
-        allow(File).to receive(:read).with('My Snippet').and_return('foo')
-      end
+      before { allow(File).to receive(:exist?).and_return(false) }
 
       it 'creates the ~/.snippit directory' do
         described_class.new(args).start
@@ -50,6 +49,11 @@ RSpec.describe Snippit::CLI, '#start' do
       it 'writes the snippet to the ~/.snippit directory' do
         described_class.new(args).start
         expect(File).to have_received(:write).with(File.expand_path('.snippit/my-snippet', Dir.home), 'foo')
+      end
+
+      it 'writes the definitions file' do
+        described_class.new(args).start
+        expect(File).to have_received(:write).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home), { 'My Snippet' => 'my-snippet' }.to_yaml)
       end
     end
   end
