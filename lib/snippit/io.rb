@@ -39,21 +39,21 @@ module Snippit
       File.expand_path('.snippit', Dir.home)
     end
 
-    # Loads the ~/.__definitions__.yml file if it exists, or returns an empty hash.
+    # Loads the ~/.snippit/.__definitions__.yml file if it exists, or returns an empty hash.
     def definitions
       return {} unless File.exist?(definitions_file)
 
       YAML.load_file(definitions_file)
     end
 
-    # Writes the definitions to the ~/.__definitions__.yml file.
+    # Writes the definitions to the ~/.snippit/.__definitions__.yml file.
     def write_definition(definitions)
       File.write(definitions_file, definitions.to_yaml)
     end
 
-    # Returns the path to the ~/.__definitions__.yml file.
+    # Returns the path to the ~/.snippit/.__definitions__.yml file.
     def definitions_file
-      File.expand_path('.__definitions__.yml', Dir.home)
+      File.expand_path('.__definitions__.yml', snippit_dir)
     end
   end
 end
