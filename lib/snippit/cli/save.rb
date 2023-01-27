@@ -26,8 +26,6 @@ module Snippit
       #
       # @return [Integer] the exit code
       def start
-        # TODO: Support --name to use a different name than the filename
-        # TODO: Support --slug to use a different slug than the filename
         base_name = File.basename(@path)
         slug = @slug || slugify(base_name)
 
