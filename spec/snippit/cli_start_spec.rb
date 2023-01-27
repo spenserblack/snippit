@@ -58,6 +58,30 @@ RSpec.describe Snippit::CLI, '#start' do
       end
     end
 
+    context 'when --name is given' do
+      let(:args) { ['--save', 'My Snippet', '--name', 'My Snippet Name'] }
+
+      before { allow(File).to receive(:exist?).and_return(false) }
+
+      it 'uses the provided name in the definitions file' do
+        described_class.new(args).start
+        expect(File).to have_received(:write).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home),
+                                                   { 'my-snippet' => 'My Snippet Name' }.to_yaml)
+      end
+    end
+
+    context 'when --slug is given' do
+      let(:args) { ['--save', 'My Snippet', '--slug', 'my-snippet-slug'] }
+
+      before { allow(File).to receive(:exist?).and_return(false) }
+
+      it 'uses the provided slug in the definitions file' do
+        described_class.new(args).start
+        expect(File).to have_received(:write).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home),
+                                                   { 'my-snippet-slug' => 'My Snippet' }.to_yaml)
+      end
+    end
+
     context 'when the file conflicts with an existing snippet' do
       before do
         allow(File).to receive(:exist?).with(File.expand_path('.snippit/my-snippet', Dir.home)).and_return(true)
