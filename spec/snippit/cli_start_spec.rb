@@ -53,7 +53,8 @@ RSpec.describe Snippit::CLI, '#start' do
 
       it 'writes the definitions file' do
         described_class.new(args).start
-        expect(File).to have_received(:write).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home), { 'My Snippet' => 'my-snippet' }.to_yaml)
+        expect(File).to have_received(:write).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home),
+                                                   { 'My Snippet' => 'my-snippet' }.to_yaml)
       end
     end
   end

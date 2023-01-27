@@ -30,16 +30,25 @@ module Snippit
     def parser
       OptionParser.new do |opts|
         opts.banner = 'Usage: snippit|snip [options]'
+        opts.separator ''
+        opts.separator 'Options:'
+        add_save_option(opts)
+        add_version_option(opts)
+      end
+    end
 
-        opts.on('-s', '-a', '--save PATH', '--add PATH', 'Save a new snippet') do |path|
-          @opts[:save] = path
-        end
-        opts.on('-f', '--force', 'Used with --save to overwrite existing snippets') do
-          @opts[:force] = true
-        end
-        opts.on('-v', '--version', 'Print version') do
-          @opts[:version] = true
-        end
+    def add_save_option(opts)
+      opts.on('-s', '-a', '--save PATH', '--add PATH', 'Save a new snippet') do |path|
+        @opts[:save] = path
+      end
+      opts.on('-f', '--force', 'Used with --save to overwrite existing snippets') do
+        @opts[:force] = true
+      end
+    end
+
+    def add_version_option(opts)
+      opts.on('-v', '--version', 'Print version') do
+        @opts[:version] = true
       end
     end
 
