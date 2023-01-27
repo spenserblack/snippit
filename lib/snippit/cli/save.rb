@@ -24,14 +24,23 @@ module Snippit
       #
       # @return [Integer] the exit code
       def start
-        # TODO: Refuse if filename would be .__definitions__.yml
         base_name = File.basename(@path)
         slug = slugify(base_name)
 
+        handle(slug) { write_snippet(base_name, slug, File.read(@path), @force) }
+      end
+
+      private
+
+      # Executes a provided block, handling errors.
+      def handle(slug)
         begin
-          write_snippet(base_name, slug, File.read(@path), @force)
+          yield
         rescue Snippit::SnippetExistsError
           warn "Snippet #{slug} already exists. Use --force to overwrite."
+          return 1
+        rescue Snippit::ReservedFilenameError
+          warn "#{slug} is a reserved filename. Please choose another."
           return 1
         end
 

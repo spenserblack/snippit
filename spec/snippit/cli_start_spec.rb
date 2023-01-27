@@ -86,4 +86,20 @@ RSpec.describe Snippit::CLI, '#start' do
       end
     end
   end
+
+  context 'when `--save .__definitions__.yml` is given' do
+    let(:args) { ['--save', '.__definitions__.yml'] }
+
+    before do
+      allow(File).to receive(:read).with('.__definitions__.yml').and_return('')
+    end
+
+    it 'warns the user that the file is reserved' do
+      expect { described_class.new(args).start }.to output(/reserved/).to_stderr
+    end
+
+    it 'returns 1' do
+      expect(described_class.new(args).start).to eq(1)
+    end
+  end
 end

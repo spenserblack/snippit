@@ -13,6 +13,8 @@ module Snippit
     # @param [String] contents The contents of the file.
     # @param [TrueClass|FalseClass] force Whether or not to overwrite an existing file.
     def write_snippet(name, slug, contents, force)
+      raise ReservedFilenameError, slug if slug == '.__definitions__.yml'
+
       raise SnippetExistsError, slug if File.exist?(filepath!(slug)) && !force
 
       File.write(filepath!(slug), contents)
