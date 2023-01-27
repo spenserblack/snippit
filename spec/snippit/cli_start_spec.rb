@@ -3,7 +3,7 @@
 require 'snippit/cli'
 require 'snippit/version'
 
-RSpec.describe Snippit::CLI do
+RSpec.describe Snippit::CLI, '#start' do
   context 'when --version is given' do
     let(:args) { %w[--version] }
 
