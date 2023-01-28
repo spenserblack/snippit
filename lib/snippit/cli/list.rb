@@ -6,7 +6,7 @@ module Snippit
   class CLI
     # Snippit::CLI::List lists all snippets.
     class List
-      include Snippit::Io
+      include Snippit::IO
 
       # Starts the list subcommand.
       #

@@ -8,7 +8,7 @@ module Snippit
   class CLI
     # Snippit::CLI::Save saves a new snippet, or overwrites an existing one.
     class Save
-      include Snippit::Io
+      include Snippit::IO
       include Snippit::Slugify
 
       # Initializes a new Save subcommand.

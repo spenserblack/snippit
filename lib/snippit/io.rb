@@ -5,7 +5,7 @@ require 'yaml'
 
 module Snippit
   # Provides IO functions for Snippit.
-  module Io
+  module IO
     # Writes the contents of a code snippet to a file.
     #
     # @param [String] name The name of the snippet
