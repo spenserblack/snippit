@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'optparse'
+require 'snippit/cli/list'
 require 'snippit/cli/save'
 require 'snippit/cli/version'
 
@@ -20,6 +21,8 @@ module Snippit
 
       return Version.new.start if @opts[:version]
 
+      return List.new.start if @opts[:list]
+
       return Save.new(@opts[:save], **@opts.slice(:force, :name, :slug)).start if @opts.key?(:save)
 
       bad_usage
@@ -32,6 +35,7 @@ module Snippit
         opts.banner = 'Usage: snippit|snip [options]'
         opts.separator ''
         opts.separator 'Options:'
+        add_list_option(opts)
         add_save_option(opts)
         add_version_option(opts)
       end
@@ -53,6 +57,12 @@ module Snippit
       end
       opts.on('-S', '--slug SLUG', 'Used with --save to set the snippet slug') do |slug|
         @opts[:slug] = slug
+      end
+    end
+
+    def add_list_option(opts)
+      opts.on('-l', '--list', 'List all snippet slugs and their names') do
+        @opts[:list] = true
       end
     end
 
