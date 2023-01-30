@@ -221,6 +221,7 @@ RSpec.describe Snippit::CLI, '#start' do
     let(:args) { ['--list'] }
 
     before do
+      allow(File).to receive(:exist?).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home)).and_return(true)
       allow(YAML).to receive(:load_file).with(File.expand_path('.snippit/.__definitions__.yml',
                                                                Dir.home)).and_return({ 'my-snippet' => 'My Snippet',
                                                                                        'foo' => 'bar' })
