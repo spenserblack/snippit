@@ -1,5 +1,1 @@
-FileUtils Fix
 
-## Fixed
-
-- Fatal error for missing `FileUtils` constant
