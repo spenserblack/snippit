@@ -127,6 +127,56 @@ RSpec.describe Snippit::CLI, '#start' do
     end
   end
 
+  context 'when `--delete my-snippet` is given' do
+    let(:args) { %w[--delete my-snippet] }
+
+    before do
+      allow(File).to receive(:exist?).with(File.expand_path('.snippit/my-snippet', Dir.home)).and_return(true)
+      allow(File).to receive(:exist?).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home)).and_return(true)
+      allow(File).to receive(:delete)
+      allow(File).to receive(:write)
+    end
+
+    context 'when my-snippet exists' do
+      before do
+        allow(YAML).to receive(:load_file).with(File.expand_path('.snippit/.__definitions__.yml',
+                                                                 Dir.home)).and_return({ 'my-snippet' => 'My Snippet',
+                                                                                         'foo' => 'bar' })
+      end
+
+      it 'removes the definition' do
+        described_class.new(args).start
+        expect(File).to have_received(:write).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home),
+                                                   { 'foo' => 'bar' }.to_yaml)
+      end
+
+      it 'deletes the file' do
+        described_class.new(args).start
+        expect(File).to have_received(:delete).with(File.expand_path('.snippit/my-snippet', Dir.home))
+      end
+
+      it 'returns 0' do
+        expect(described_class.new(args).start).to eq(0)
+      end
+    end
+
+    context 'when the snippet does not exist' do
+      before do
+        allow(YAML).to receive(:load_file).with(File.expand_path('.snippit/.__definitions__.yml',
+                                                                 Dir.home)).and_return({ 'foo' => 'bar' })
+      end
+
+      it 'does not delete the file' do
+        described_class.new(args).start
+        expect(File).not_to have_received(:delete)
+      end
+
+      it 'returns 1' do
+        expect(described_class.new(args).start).to eq(1)
+      end
+    end
+  end
+
   context 'when `--list` is given' do
     let(:args) { ['--list'] }
 

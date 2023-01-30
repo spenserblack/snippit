@@ -21,6 +21,16 @@ module Snippit
       write_definition(definitions.merge(slug => name))
     end
 
+    # Removes a code snippet.
+    #
+    # @param [String] slug The name of the file. Relative to the ~/.snippit directory
+    def delete_snippet(slug)
+      raise ReservedFilenameError, slug if slug == '.__definitions__.yml'
+
+      File.delete(filepath!(slug))
+      write_definition(definitions.reject { |k, _v| k == slug })
+    end
+
     # Gets the filepath to the snippet.
     #
     # Also creates the ~/.snippit directory if it does not exist.

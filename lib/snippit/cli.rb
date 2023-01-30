@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'optparse'
+require 'snippit/cli/delete'
 require 'snippit/cli/list'
 require 'snippit/cli/save'
 require 'snippit/cli/version'
@@ -21,9 +22,8 @@ module Snippit
 
       return Version.new.start if @opts[:version]
 
-      return List.new.start if @opts[:list]
-
-      return Save.new(@opts[:save], **@opts.slice(:force, :name, :slug)).start if @opts.key?(:save)
+      result = start_io
+      return result unless result.nil?
 
       bad_usage
     end
@@ -37,6 +37,7 @@ module Snippit
         opts.separator 'Options:'
         add_list_option(opts)
         add_save_option(opts)
+        add_delete_option(opts)
         add_version_option(opts)
       end
     end
@@ -60,6 +61,12 @@ module Snippit
       end
     end
 
+    def add_delete_option(opts)
+      opts.on('-d', '--delete SLUG', 'Delete a snippet') do |slug|
+        @opts[:delete] = slug
+      end
+    end
+
     def add_list_option(opts)
       opts.on('-l', '--list', 'List all snippet slugs and their names') do
         @opts[:list] = true
@@ -75,6 +82,15 @@ module Snippit
     def bad_usage
       puts parser
       1
+    end
+
+    # Handles options that require IO.
+    def start_io
+      return List.new.start if @opts[:list]
+
+      return Save.new(@opts[:save], **@opts.slice(:force, :name, :slug)).start if @opts.key?(:save)
+
+      return Delete.new(@opts[:delete]).start if @opts.key?(:delete)
     end
   end
 end
