@@ -2,6 +2,7 @@
 
 require 'optparse'
 require 'snippit/cli/delete'
+require 'snippit/cli/get'
 require 'snippit/cli/list'
 require 'snippit/cli/save'
 require 'snippit/cli/version'
@@ -37,6 +38,7 @@ module Snippit
         opts.separator 'Options:'
         add_list_option(opts)
         add_save_option(opts)
+        add_get_option(opts)
         add_delete_option(opts)
         add_version_option(opts)
       end
@@ -58,6 +60,12 @@ module Snippit
       end
       opts.on('-S', '--slug SLUG', 'Used with --save to set the snippet slug') do |slug|
         @opts[:slug] = slug
+      end
+    end
+
+    def add_get_option(opts)
+      opts.on('-g', '--get SLUG', 'Get a snippet') do |slug|
+        @opts[:get] = slug
       end
     end
 
@@ -89,6 +97,8 @@ module Snippit
       return List.new.start if @opts[:list]
 
       return Save.new(@opts[:save], **@opts.slice(:force, :name, :slug)).start if @opts.key?(:save)
+
+      return Get.new(@opts[:get]).start if @opts.key?(:get)
 
       return Delete.new(@opts[:delete]).start if @opts.key?(:delete)
     end

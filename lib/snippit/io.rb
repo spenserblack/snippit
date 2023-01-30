@@ -6,6 +6,16 @@ require 'yaml'
 module Snippit
   # Provides IO functions for Snippit.
   module IO
+    # Reads teh contents of a code snippet.
+    #
+    # @param [String] slug The name of the snippet.
+    # @return [String] The contents of the snippet.
+    def read_snippet(slug)
+      raise SnippetNotFoundError, slug unless File.exist?(filepath!(slug))
+
+      File.read(filepath!(slug))
+    end
+
     # Writes the contents of a code snippet to a file.
     #
     # @param [String] name The name of the snippet

@@ -177,6 +177,46 @@ RSpec.describe Snippit::CLI, '#start' do
     end
   end
 
+  context 'when `--get my-snippet` is given' do
+    let(:args) { %w[--get my-snippet] }
+
+    before do
+      allow(File).to receive(:exist?).with(File.expand_path('.snippit/my-snippet', Dir.home)).and_return(true)
+      allow(File).to receive(:exist?).with(File.expand_path('.snippit/.__definitions__.yml', Dir.home)).and_return(true)
+    end
+
+    context 'when my-snippet exists' do
+      before do
+        allow(YAML).to receive(:load_file).with(File.expand_path('.snippit/.__definitions__.yml',
+                                                                 Dir.home)).and_return({ 'my-snippet' => 'My Snippet' })
+        allow(File).to receive(:read).with(File.expand_path('.snippit/my-snippet', Dir.home)).and_return('foo')
+      end
+
+      it 'prints the snippets contents to STDOUT' do
+        expect { described_class.new(args).start }.to output('foo').to_stdout
+      end
+
+      it 'returns 0' do
+        expect(described_class.new(args).start).to eq(0)
+      end
+    end
+
+    context 'when the snippet does not exist' do
+      before do
+        allow(YAML).to receive(:load_file).with(File.expand_path('.snippit/.__definitions__.yml',
+                                                                 Dir.home)).and_return({ 'foo' => 'bar' })
+      end
+
+      it 'prints a warning to STDERR' do
+        expect { described_class.new(args).start }.to output("Snippet 'my-snippet' does not exist.\n").to_stderr
+      end
+
+      it 'returns 1' do
+        expect(described_class.new(args).start).to eq(1)
+      end
+    end
+  end
+
   context 'when `--list` is given' do
     let(:args) { ['--list'] }
 

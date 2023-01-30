@@ -7,6 +7,9 @@ module Snippit
   class SnippetExistsError < Error
   end
 
+  class SnippetNotFoundError < Error
+  end
+
   class ReservedFilenameError < Error
   end
 end
