@@ -21,13 +21,15 @@
 # Generates a release tag from RELEASE_NOTES, temporarily setting
 # comments to ; to permit Markdown, creates the tag, then
 # clears RELEASE_NOTES and resets git comments.
-#
-# source: https://github.com/spenserblack/release.sh
 set -e
 
 TAG_NAME=$1
 TAG_TARGET=$2
 RELEASESH_PRERELEASE=${RELEASESH_PRERELEASE:-0}
+
+echo "$TAG_NAME" | sed 's/^v//' > lib/snippit/VERSION
+git add lib/snippit/VERSION
+git commit -m "Update Snippit::VERSION"
 
 if git config core.commentChar; then
 	HAD_COMMENT_CHAR=1
