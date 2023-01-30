@@ -1,2 +1,4 @@
 bin/* linguist-vendored
 *.snap -whitespace
+
+RELEASE_NOTES linguist-language=Markdown
