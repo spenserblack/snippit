@@ -126,4 +126,22 @@ RSpec.describe Snippit::CLI, '#start' do
       expect(described_class.new(args).start).to eq(1)
     end
   end
+
+  context 'when `--list` is given' do
+    let(:args) { ['--list'] }
+
+    before do
+      allow(YAML).to receive(:load_file).with(File.expand_path('.snippit/.__definitions__.yml',
+                                                               Dir.home)).and_return({ 'my-snippet' => 'My Snippet',
+                                                                                       'foo' => 'bar' })
+    end
+
+    it 'prints the list of snippets' do
+      expected = <<~OUTPUT
+        my-snippet: My Snippet
+        foo: bar
+      OUTPUT
+      expect { described_class.new(args).start }.to output(expected).to_stdout
+    end
+  end
 end
