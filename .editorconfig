@@ -8,6 +8,10 @@ charset = UTF-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+[*.sh]
+indent_style = tab
+indent_size = unset
+
 [*.snap]
 indent_style = unset
 indent_size = unset
