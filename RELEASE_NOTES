@@ -1,13 +1,1 @@
-Initial Version
 
-## Added
-
-- `snippit --save` to save snippets
-  - `--add` alias
-  - `--force` to force overwriting
-  - `--name` to set a different name
-  - `--slug` to use a different slug (ID)
-- `snippit --get` to get snippets
-- `snippit --delete` to delete snippets
-- `snippit --list` to list available snippets
-- `snip` as an alias of `snippit`
