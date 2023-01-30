@@ -7,22 +7,22 @@
 
 Define, store, and output your code snippets.
 
-## (Proposed) Usage
+## Usage
 
 All uses of `snippit` can be replaced with the shortcut `snip`.
 
 ```console
 # Define a snippet called "hello-world.js"
-$ snippit save hello-world.js
+$ snippit --save hello-world.js
 
-# Make a code snippet called "Hello World (JS)" from STDIN
-$ echo "console.log('Hello, World!');" | snippit save --name "Hello World (JS)"
+# Set the slug and descriptive name of the snippet
+$ snippit --save hello-world.js --slug hw-js --name "JavaScript Starter"
 
-# Output the "Hello World (JS)" snippet to a file called "index.js"
-$ snippit out "Hello World (JS)" > index.js
+# Output the "JavaScript Starter" snippet to a file called "index.js"
+$ snippit --get hw-js > index.js
 
 # List all of your code snippets
-$ snippit list
+$ snippit --list
 ```
 
 ## How it works
@@ -30,5 +30,4 @@ $ snippit list
 Code snippets get stored in a directory called `.snippit` in your home
 directory. The actual code snippet filenames are slugified versions of the
 snippet name. `__definitions__.yml` is a reserved filename, as it is used to
-map snippet names to their filenames. You can either select a snippet by its
-name or by its slugified name.
+map snippet slugs (filenames) to their human-readable names.
