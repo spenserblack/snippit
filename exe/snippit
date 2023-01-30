@@ -3,4 +3,4 @@
 
 require 'snippit/cli'
 
-Snippit::CLI.start(ARGV)
+exit Snippit::CLI.new(ARGV).start

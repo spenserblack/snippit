@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Snippit
+module Snippit
   # Provides the slugify function
   module Slugify
     # Slugify a string
