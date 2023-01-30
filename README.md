@@ -1,4 +1,4 @@
-# Snippit (WIP)
+# Snippit
 
 [![Gem Version](https://badge.fury.io/rb/snippit.svg)](https://badge.fury.io/rb/snippit)
 [![CI](https://github.com/spenserblack/snippit/actions/workflows/ci.yml/badge.svg)](https://github.com/spenserblack/snippit/actions/workflows/ci.yml)
