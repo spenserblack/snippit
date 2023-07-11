@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.homepage                = 'https://github.com/spenserblack/snippit'
   spec.license                 = 'MIT'
 
-  spec.required_ruby_version   = Gem::Requirement.new('>= 2.6.0')
+  spec.required_ruby_version   = Gem::Requirement.new('>= 2.7.0')
 
   spec.files                   = Dir['lib/**/*'] + Dir['exe/*'] + Dir['[A-Z]*']
 
@@ -29,16 +29,4 @@ Gem::Specification.new do |spec|
     'github_repo' => "ssh://github.com/spenserblack/#{spec.name}",
     'rubygems_mfa_required' => 'true'
   }
-
-  spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'overcommit', '~> 0.59'
-  spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.11'
-  spec.add_development_dependency 'rspec-snapshot', '~> 2.0'
-  spec.add_development_dependency 'rubocop', '~> 1.36'
-  spec.add_development_dependency 'rubocop-rake', '~> 0.6'
-  spec.add_development_dependency 'rubocop-rspec', '~> 2.13'
-  spec.add_development_dependency 'simplecov', '~> 0.21'
-  spec.add_development_dependency 'simplecov-cobertura', '~> 2.1'
-  spec.add_development_dependency 'yard', '~> 0.9.28'
 end
