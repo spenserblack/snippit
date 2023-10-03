@@ -100,7 +100,7 @@ module Snippit
 
       return Get.new(@opts[:get]).start if @opts.key?(:get)
 
-      return Delete.new(@opts[:delete]).start if @opts.key?(:delete)
+      Delete.new(@opts[:delete]).start if @opts.key?(:delete)
     end
   end
 end
